@@ -1,9 +1,11 @@
+package br.edu.faculdade.cinema;
+
 public class Usuario {
 
-	private string login;
+	private String login;
 
-	private string senha;
+	private String senha;
 
-	private string cargo;
+	private String cargo;
 
 }

@@ -1,3 +1,5 @@
+package br.edu.faculdade.cinema;
+
 public class Ingresso {
 
 	private int id;

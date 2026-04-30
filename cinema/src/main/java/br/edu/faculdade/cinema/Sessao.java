@@ -1,3 +1,7 @@
+package br.edu.faculdade.cinema;
+
+import java.time.LocalDateTime;
+
 public class Sessao {
 
 	private int id;

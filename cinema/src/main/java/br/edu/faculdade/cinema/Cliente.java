@@ -1,10 +1,14 @@
+package br.edu.faculdade.cinema;
+
+import java.time.LocalDateTime;
+
 public class Cliente {
 
 	private int id;
 
-	private string Nome;
+	private String Nome;
 
-	private string CPF;
+	private String CPF;
 
 	private LocalDateTime dataNascimento;
 

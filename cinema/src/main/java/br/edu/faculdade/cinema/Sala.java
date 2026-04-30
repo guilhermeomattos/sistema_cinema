@@ -1,3 +1,5 @@
+package br.edu.faculdade.cinema;
+
 public class Sala {
 
 	private int id;

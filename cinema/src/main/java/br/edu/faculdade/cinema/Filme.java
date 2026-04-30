@@ -1,16 +1,18 @@
+package br.edu.faculdade.cinema;
+
 public class Filme {
 
 	private int id;
 
-	private string titulo;
+	private String titulo;
 
-	private string genero;
+	private String genero;
 
 	private int duracao;
 
-	private string classificacao;
+	private String classificacao;
 
-	private string sinopse;
+	private String sinopse;
 
 	private boolean emCartaz;
 
