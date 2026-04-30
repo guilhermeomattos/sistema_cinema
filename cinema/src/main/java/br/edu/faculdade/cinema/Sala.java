@@ -8,4 +8,8 @@ public class Sala {
 
 	private int tipo;
 
+	public int getAssentosDisponiveis(Sessao sessao) {
+		return 0;
+	}
+
 }

@@ -2,14 +2,26 @@ public class Sessao {
 
 	private int id;
 
-	private int id_filme;
-
-	private int id_sala;
-
-	private LocalDate dataHora;
+	private LocalDateTime dataHora;
 
 	private double preco;
 
 	private int Status;
+
+	public boolean isDisponivel() {
+		return false;
+	}
+
+	public int getOcupacao() {
+		return 0;
+	}
+
+	public void encerrar() {
+
+	}
+
+	public double percentualOcupacao() {
+		return 0;
+	}
 
 }

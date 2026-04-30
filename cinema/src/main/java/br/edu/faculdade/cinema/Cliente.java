@@ -2,12 +2,16 @@ public class Cliente {
 
 	private int id;
 
-	private String Nome;
+	private string Nome;
 
-	private String CPF;
+	private string CPF;
 
-	private LocalDate dataNascimento;
+	private LocalDateTime dataNascimento;
 
 	private int tipoCliente;
+
+	public boolean temMeiaEntrada() {
+		return false;
+	}
 
 }

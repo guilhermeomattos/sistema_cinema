@@ -1,9 +1,9 @@
 public class Usuario {
 
-	private String login;
+	private string login;
 
-	private String senha;
+	private string senha;
 
-	private String cargo;
+	private string cargo;
 
 }

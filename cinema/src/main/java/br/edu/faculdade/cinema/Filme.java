@@ -2,16 +2,20 @@ public class Filme {
 
 	private int id;
 
-	private String titulo;
+	private string titulo;
 
-	private String genero;
+	private string genero;
 
 	private int duracao;
 
-	private String classificacao;
+	private string classificacao;
 
-	private String sinopse;
+	private string sinopse;
 
 	private boolean emCartaz;
+
+	public boolean EmCartaz() {
+		return false;
+	}
 
 }

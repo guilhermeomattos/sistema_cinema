@@ -2,8 +2,6 @@ public class Ingresso {
 
 	private int id;
 
-	private int id_reserva;
-
 	private int numeroAssento;
 
 	private int tipo;
@@ -11,5 +9,9 @@ public class Ingresso {
 	private double valorPago;
 
 	private Reserva reserva;
+
+	public Ingresso gerarIngresso(Reserva reserva, int assento) {
+		return null;
+	}
 
 }
