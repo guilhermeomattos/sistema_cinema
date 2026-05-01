@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head><meta charset="UTF-8"><title>Reservas - CinemaSystem</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+  <div th:replace="~{fragments/navbar :: navbar}"></div>
+  <div class="container mt-4">
+    <div th:if="${sucesso}" class="alert alert-success alert-dismissible fade show">
+      <span th:text="${sucesso}"></span>
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    <div th:if="${erro}" class="alert alert-danger alert-dismissible fade show">
+      <span th:text="${erro}"></span>
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2>🎟 Reservas</h2>
+      <a th:href="@{/reservas/nova}" class="btn btn-dark">+ Nova Reserva</a>
+    </div>
+    <div class="card shadow-sm">
+      <div class="card-body p-0">
+        <table class="table table-hover mb-0">
+          <thead class="table-dark">
+            <tr><th>#</th><th>Cliente</th><th>Filme</th><th>Sessão</th><th>Meia?</th><th>Valor</th><th>Status</th><th>Ações</th></tr>
+          </thead>
+          <tbody>
+            <tr th:each="r : ${reservas}">
+              <td th:text="${r.id}"></td>
+              <td th:text="${r.nomeCliente}"></td>
+              <td th:text="${r.tituloFilme}"></td>
+              <td th:text="${#temporals.format(r.dataHoraSessao, 'dd/MM HH:mm')}"></td>
+              <td>
+                <span th:class="${r.meiaEntrada} ? 'badge bg-success' : 'badge bg-secondary'"
+                      th:text="${r.meiaEntrada} ? 'Meia' : 'Inteira'"></span>
+              </td>
+              <td th:text="'R$ ' + ${#numbers.formatDecimal(r.valorTotal, 1, 'POINT', 2, 'COMMA')}"></td>
+              <td>
+                <span th:class="${r.status.name() == 'CONFIRMADA'} ? 'badge bg-success' : (${r.status.name() == 'CANCELADA'} ? 'badge bg-danger' : 'badge bg-secondary')"
+                      th:text="${r.status}"></span>
+              </td>
+              <td class="d-flex gap-1 flex-wrap">
+                <form th:if="${r.status.name() != 'CANCELADA'}"
+                      th:action="@{/reservas/{id}/cancelar(id=${r.id})}" method="post" class="d-inline"
+                      onsubmit="return confirm('Cancelar esta reserva?')">
+                  <button class="btn btn-sm btn-outline-warning">Cancelar</button>
+                </form>
+                <form th:action="@{/reservas/{id}/deletar(id=${r.id})}" method="post" class="d-inline"
+                      onsubmit="return confirm('Remover reserva?')">
+                  <button class="btn btn-sm btn-outline-danger">Remover</button>
+                </form>
+              </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(reservas)}">
+              <td colspan="8" class="text-center text-muted py-3">Nenhuma reserva cadastrada.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body></html>

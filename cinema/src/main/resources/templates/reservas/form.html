@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head><meta charset="UTF-8"><title>Nova Reserva - CinemaSystem</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+  <div th:replace="~{fragments/navbar :: navbar}"></div>
+  <div class="container mt-4">
+    <div th:if="${sucesso}" class="alert alert-success alert-dismissible fade show">
+      <span th:text="${sucesso}"></span>
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    <div th:if="${erro}" class="alert alert-danger alert-dismissible fade show">
+      <span th:text="${erro}"></span>
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    <div class="card shadow-sm" style="max-width:550px;">
+      <div class="card-header bg-dark text-white">Nova Reserva</div>
+      <div class="card-body">
+        <form th:action="@{/reservas}" th:object="${reserva}" method="post">
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Cliente *</label>
+            <select th:field="*{clienteId}" class="form-select"
+                    th:classappend="${#fields.hasErrors('clienteId')} ? 'is-invalid'">
+              <option value="">Selecione um cliente</option>
+              <option th:each="c : ${clientes}"
+                      th:value="${c.id}"
+                      th:text="${c.nome} + ' (' + ${c.tipoCliente} + (${c.temMeiaEntrada} ? ' - MEIA ENTRADA' : '') + ')'">
+              </option>
+            </select>
+            <div class="invalid-feedback" th:errors="*{clienteId}"></div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Sessão disponível *</label>
+            <select th:field="*{sessaoId}" class="form-select"
+                    th:classappend="${#fields.hasErrors('sessaoId')} ? 'is-invalid'">
+              <option value="">Selecione uma sessão</option>
+              <option th:each="s : ${sessoes}"
+                      th:value="${s.id}"
+                      th:text="${s.tituloFilme} + ' | ' + ${#temporals.format(s.dataHora, 'dd/MM HH:mm')} + ' | Sala ' + ${s.numeroSala} + ' | R$ ' + ${#numbers.formatDecimal(s.preco,1,'POINT',2,'COMMA')} + ' | ' + ${s.assentosDisponiveis} + ' vagas'">
+              </option>
+            </select>
+            <div class="invalid-feedback" th:errors="*{sessaoId}"></div>
+          </div>
+
+          <div class="alert alert-info small py-2">
+            💡 Clientes do tipo <strong>ESTUDANTE</strong> ou <strong>IDOSO</strong> têm direito à meia-entrada (50% de desconto).
+          </div>
+
+          <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-dark">Reservar</button>
+            <a th:href="@{/reservas}" class="btn btn-outline-secondary">Cancelar</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body></html>
